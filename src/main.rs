@@ -1,3 +1,10 @@
+use socketcan::CANSocket;
+
 fn main() {
-    println!("Hello, world!");
+    let can = CANSocket::open("slcan0").unwrap();
+
+    loop {
+        let frame = can.read_frame().unwrap();
+        println!("{:?}", frame);
+    }
 }
